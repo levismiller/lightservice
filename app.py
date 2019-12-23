@@ -8,6 +8,8 @@ pixels = neopixel.NeoPixel(board.D18, 150)
 
 app = Flask(__name__)
 
+fading = False
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -15,11 +17,14 @@ def index():
 @app.route('/light/<color>')
 def color_change(color):
     change_color = True
+    global fading
+    if fading:
+        return render_template('index.html')
 
     if color == 'favicon.ico':
         change_color = False
     else:
-
+        fading = True
         if color == '1':
             color = (255,0,0)
         elif color == '2':
@@ -30,18 +35,19 @@ def color_change(color):
             color = (0,0,0)
     
     if change_color:
-        pixels.brightness = .01
+        pixels.brightness = .001
         pixels.fill(color)
         pixels.show()
 
 
-        bright = .01
+        bright = .001
         while bright + .01 <= 1:
             bright += .01
             pixels.brightness = bright
-            sleep(.005)
+            sleep(.009)
 
         pixels.show()
+        fading = False
 
     return render_template('index.html')
     
