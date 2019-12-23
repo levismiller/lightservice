@@ -1,0 +1,11 @@
+a {
+	font-size: 80px;
+	color: #fff;
+}
+
+div {
+	border: 1px solid #000;
+	background-color: #336699;
+	padding: 20px;
+	margin: 20px;
+}
