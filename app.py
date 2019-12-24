@@ -35,16 +35,20 @@ def color_change(color):
             color = (0,0,0)
     
     if change_color:
+        #pixels.fill((0,0,0)) 
         pixels.brightness = .001
         pixels.fill(color)
         pixels.show()
+        sleep(.2)
 
 
         bright = .001
         while bright + .01 <= 1:
             bright += .01
             pixels.brightness = bright
-            sleep(.009)
+            sleep(.005)
+
+        print('done')
 
         pixels.show()
         fading = False
